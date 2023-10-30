@@ -4,34 +4,24 @@ import { adminCourseLis } from '@/apis';
     ref="mainRef"
     class="tw-w-full tw-h-full tw-p-[20px]">
     <div ref="headerRef">
-      <el-title title="课程管理"></el-title>
+      <el-title title="COURSE-MANAGE"></el-title>
       <div class="tw-w-full tw-mt-[10px]">
         <el-form :model="formData">
           <el-row :gutter="20">
             <el-col :span="6">
-              <el-form-item label="课程名称">
+              <el-form-item label="COURSE_NAME">
                 <el-input
                   v-model="formData.keyword"
                   style="width: 100%">
                 </el-input>
               </el-form-item>
             </el-col>
-            <el-col :span="6">
-              <el-form-item label="用户职位">
-                <el-select v-model="formData.roleId">
-                  <el-option
-                    v-for="item in roles"
-                    :key="item.id"
-                    :label="item.roleName"
-                    :value="item.id">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-            </el-col>
+            <el-col :span="6"> </el-col>
             <el-col :span="8"></el-col>
             <el-col :span="4">
               <el-button
                 type="primary"
+                s
                 @click="onSearch">
                 查询
               </el-button>
@@ -81,12 +71,17 @@ import { adminCourseLis } from '@/apis';
           <el-button
             type="primary"
             @click="edit(row)">
-            详情
+            DETAIL
           </el-button>
           <el-button
             type="primary"
             @click="edit(row)">
-            编辑
+            EDIT
+          </el-button>
+          <el-button
+            type="danger"
+            @click="deleteCourse1(row)">
+            DELTE
           </el-button>
         </template>
       </el-table-column>
@@ -114,28 +109,28 @@ import { adminCourseLis } from '@/apis';
         label-width="120px">
         <el-form-item
           prop="courseName"
-          label="课程名称">
+          label="COURSE-NAME">
           <el-input v-model="courseForm.courseName"></el-input>
         </el-form-item>
         <el-form-item
           prop="priceType"
-          label="价格类型">
+          label="PRICE-TYPE">
           <el-radio-group v-model="courseForm.priceType">
             <el-radio label="免费"></el-radio>
             <el-radio label="付费"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item
-          prop="priceType"
-          label="价格">
+          prop="price"
+          label="PRICE">
           <el-input v-model="courseForm.price"></el-input>
         </el-form-item>
         <el-form-item
           prop="photo"
-          label="文件">
+          label="FILE">
           <el-upload
             ref="uploadRef"
-            v-model:file-list="courseForm.fileIds"
+            v-model:file-list="courseForm.fileInfos"
             :action="uploadUrl"
             list-type="picture-card"
             :on-exceed="onExceed">
@@ -161,6 +156,7 @@ import { adminCourseLis } from '@/apis';
   import elTitle from '@/components/title/index.vue'
   import * as apis from '@/apis/index.js'
   import { uploadUrl, adminCourseCreate, adminUpdateCourse } from '@/apis/index.js'
+  import { courseDetail, deleteCourse } from '@/apis/user.js'
   import { onMounted, reactive, ref } from 'vue'
   import { useElementSize } from '@vueuse/core'
   import { usePagination } from '@/utils/hooks.js'
@@ -172,14 +168,14 @@ import { adminCourseLis } from '@/apis';
     courseName: '',
     price: 0.0,
     priceType: '',
-    fileIds: []
+    fileIds: [],
+    fileInfos: []
   })
   const FormRef = ref(null)
   const formData = reactive({
     keyword: '',
     roleId: ''
   })
-  const roles = ref([])
 
   const mainRef = ref(null)
   const headerRef = ref(null)
@@ -200,6 +196,25 @@ import { adminCourseLis } from '@/apis';
     onSearch()
   }
 
+  const deleteCourse1 = (row) => {
+    deleteCourse(row.id)
+      .then((res) => {
+        if (res.data.code === 0) {
+          ElMessage.success('发布成功')
+          isShow.value = false
+        } else {
+          ElMessage.error(res.data.msg)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        ElMessage.error(err)
+      })
+      .finally(() => {
+        onSearch()
+      })
+  }
+
   const onSearch = () => {
     apis
       .adminCourseLis({
@@ -215,16 +230,26 @@ import { adminCourseLis } from '@/apis';
       })
       .catch((err) => console.log(err))
   }
+
   const edit = (row) => {
+    courseDetail(row.id).then((res) => {
+      let fileInfos = res.data.fileInfos
+      courseForm.fileInfos = fileInfos.map((item) => {
+        return {
+          uid: item.id,
+          status: 'success',
+          url: item.url,
+          response: {
+            id: item.id,
+            url: item.url
+          }
+        }
+      })
+    })
     courseForm.id = row.id
     courseForm.courseName = row.courseName
     courseForm.priceType = row.priceType === 0 ? '免费' : '付费'
     courseForm.price = row.price
-
-
-
-
-    
     isShow.value = true
   }
 
@@ -238,13 +263,12 @@ import { adminCourseLis } from '@/apis';
           priceType: courseForm.priceType === '免费' ? 0 : 1,
           courseName: courseForm.courseName,
           price: courseForm.price,
-          fileIds: courseForm.fileIds.map((fileInfo) => fileInfo.response.id)
+          fileIds: courseForm.fileInfos.map((fileInfo) => fileInfo.response.id)
         })
           .then((res) => {
             if (res.data.code === 0) {
               ElMessage.success('发布成功')
               isShow.value = false
-              onSearch()
             } else {
               ElMessage.error(res.data.msg)
             }
@@ -255,6 +279,7 @@ import { adminCourseLis } from '@/apis';
           })
           .finally(() => {
             isShow.value = false
+            onSearch()
           })
       } else {
         adminUpdateCourse({
@@ -262,7 +287,7 @@ import { adminCourseLis } from '@/apis';
           courseName: courseForm.courseName,
           price: courseForm.price,
           printType: courseForm.priceType,
-          fileIds: courseForm.fileIds.map((fileInfo) => fileInfo.response.id)
+          fileIds: courseForm.fileInfos.map((fileInfo) => fileInfo.response.id)
         })
           .then((res) => {
             if (res.data.code === 0) {
@@ -278,6 +303,7 @@ import { adminCourseLis } from '@/apis';
           })
           .finally(() => {
             isShow.value = false
+            onSearch()
           })
       }
     })

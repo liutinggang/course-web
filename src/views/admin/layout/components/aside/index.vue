@@ -30,6 +30,9 @@
       <el-menu-item-group>
         <el-menu-item index="/admin/courseModule/courseManage">course</el-menu-item>
       </el-menu-item-group>
+      <el-menu-item-group>
+        <el-menu-item index="/admin/courseModule/orderManage">order</el-menu-item>
+      </el-menu-item-group>
     </el-sub-menu>
   </el-menu>
 </template>

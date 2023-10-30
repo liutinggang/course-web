@@ -19,7 +19,7 @@
           <el-col :span="24">
             <el-form-item
               prop="username"
-              label="用户名">
+              label="USERNAME">
               <el-input
                 v-model="form.username"
                 disabled
@@ -32,11 +32,11 @@
           <el-col :span="24">
             <el-form-item
               prop="username"
-              label="工作职位">
+              label="">
               <el-input
                 v-model="form.role"
                 disabled
-                placeholder="请输入用户名">
+                placeholder="pleas input your">
               </el-input>
             </el-form-item>
           </el-col>
@@ -45,10 +45,10 @@
           <el-col :span="24">
             <el-form-item
               prop="mobile"
-              label="手机号">
+              label="MOBILE">
               <el-input
                 v-model="form.mobile"
-                placeholder="请输入手机号">
+                placeholder="please input your mobile">
               </el-input>
             </el-form-item>
           </el-col>
@@ -57,26 +57,26 @@
           <el-col :span="24">
             <el-form-item
               prop="realName"
-              label="真实姓名">
+              label="REAL-NAMEs">
               <el-input
                 v-model="form.realName"
-                placeholder="请输入真实姓名">
+                placeholder="pleas input your realname">
               </el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item
           prop="identityCode"
-          label="身份证号">
+          label="ID">
           <el-input
             v-model="form.identityCode"
-            placeholder="请输入身份证号">
+            placeholder="pleas input your idCard">
           </el-input>
         </el-form-item>
 
         <el-form-item
           prop="photo"
-          label="个人头像">
+          label="AVATAR">
           <el-upload
             ref="uploadRef"
             v-model:file-list="form.photo"
@@ -90,7 +90,7 @@
         </el-form-item>
         <el-form-item>
           <div class="footer">
-            <el-button @click="back"> 返回 </el-button>
+            <el-button @click="back"> BACK </el-button>
             <el-button
               type="primary"
               :loading="btnLoading"
@@ -119,6 +119,8 @@
   import Title from '@/components/title/index.vue'
   import { uploadUrl } from '@/apis/index'
   const router = useRouter()
+  import { useUserStore } from '@/stores/user'
+  const store = useUserStore()
   onMounted(() => {
     getUserInfo()
   })
@@ -126,6 +128,7 @@
   const FormRef = ref(null)
   // 表单数据
   const form = ref({
+    avatarId: '',
     username: '',
     mobile: '',
     identityCode: '',
@@ -165,6 +168,7 @@
         form.value.identityCode = userInfo.identityCode
         form.value.realName = userInfo.displayName
         form.value.role = sysRole.roleName
+        form.value.avatarId = userInfo.avatarId
         form.value.photo = [
           {
             uid: genFileId(),
@@ -203,12 +207,13 @@
       apis
         .setUserInfo({
           ...form.value,
-          avatarUrl: form.value.photo[0].response.url || '',
-          photo: undefined
+          avatarId: form.value.photo[0].response.id
         })
         .then((res) => {
           if (res.data.code === 0) {
             ElMessage.success('保存成功')
+            let userInfo = res.data.data
+            store.setUserInfo(userInfo)
           }
         })
         .catch((err) => console.log(err))

@@ -57,6 +57,13 @@ const routes = [
             meta: {
               routerName: '资金模块-资金管理'
             }
+          },
+          {
+            path: 'orderManage',
+            component: () => import('@/views/admin/courseModule/order/index.vue'),
+            meta: {
+              routerName: '资金模块-资金管理'
+            }
           }
         ]
       },

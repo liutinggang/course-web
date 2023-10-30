@@ -1,4 +1,4 @@
-import { get, put } from './config'
+import { get, put, remove } from './config'
 /**
  *
  * 课程分页查询
@@ -39,3 +39,18 @@ export const orderDetail = (orderId) =>
  * @returns
  */
 export const teacherOrderList = (data) => get(`/course-consumer-order-api/api/v1/order/list`, data)
+
+/**
+ * 删除课程
+ * @param {*} data
+ * @returns
+ */
+export const deleteCourse = (courseId) =>
+  remove(`/course-admin-api/api/v1/admin/course/delete/${courseId}`)
+/**
+ * 删除订单
+ * @param {*} data
+ * @returns
+ */
+export const deleteOrder = (courseId) =>
+  remove(`/course-admin-api/api/v1/admin/order/delete/${courseId}`)
