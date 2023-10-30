@@ -79,12 +79,10 @@
 <script setup>
   import elTitle from '@/components/title/index.vue'
   import { myCourseOrderList } from '@/apis/user.js'
-  import { reactive, ref } from 'vue'
-  import { myCourseOrderList } from '@/apis/user'
+  import { reactive, ref, onMounted } from 'vue'
   const { pagination } = usePagination()
   import { useRouter } from 'vue-router'
   const router = useRouter()
-  import { onMounted, reactive, ref } from 'vue'
   import { useElementSize } from '@vueuse/core'
   import { usePagination } from '@/utils/hooks.js'
   const tableData = ref([])
@@ -120,7 +118,8 @@
 
   const onSearch = () => {
     myCourseOrderList({
-      ...pagination
+      ...pagination,
+      keyword: formData.keyword
     })
       .then((res) => {
         if (res.data.code === 0) {

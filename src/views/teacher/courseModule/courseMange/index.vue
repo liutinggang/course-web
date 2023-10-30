@@ -104,28 +104,28 @@ import { adminCourseLis } from '@/apis';
         label-width="120px">
         <el-form-item
           prop="courseName"
-          label="课程名称">
+          label="COURSE-NAME">
           <el-input v-model="courseForm.courseName"></el-input>
         </el-form-item>
         <el-form-item
           prop="priceType"
-          label="价格类型">
+          label="PRICE-TYPE">
           <el-radio-group v-model="courseForm.priceType">
             <el-radio label="免费"></el-radio>
             <el-radio label="付费"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item
-          prop="priceType"
-          label="价格">
+          prop="price"
+          label="PRICE">
           <el-input v-model="courseForm.price"></el-input>
         </el-form-item>
         <el-form-item
           prop="photo"
-          label="文件">
+          label="FILE">
           <el-upload
             ref="uploadRef"
-            v-model:file-list="courseForm.fileIds"
+            v-model:file-list="courseForm.fileInfos"
             :action="uploadUrl"
             list-type="picture-card"
             :on-exceed="onExceed">
@@ -163,14 +163,14 @@ import { adminCourseLis } from '@/apis';
     courseName: '',
     price: 0.0,
     priceType: '',
-    fileIds: []
+    fileIds: [],
+    fileInfos: []
   })
   const FormRef = ref(null)
   const formData = reactive({
     keyword: '',
     roleId: ''
   })
-  const roles = ref([])
 
   const mainRef = ref(null)
   const headerRef = ref(null)
@@ -208,8 +208,18 @@ import { adminCourseLis } from '@/apis';
   }
   const edit = (row) => {
     courseDetail(row.id).then((res) => {
-      let fileIds = res.data.fileIds.split(',')
-      courseForm.fileIds = fileIds
+      let fileInfos = res.data.fileInfos
+      courseForm.fileInfos = fileInfos.map((item) => {
+        return {
+          uid: item.id,
+          status: 'success',
+          url: item.url,
+          response: {
+            id: item.id,
+            url: item.url
+          }
+        }
+      })
     })
     courseForm.id = row.id
     courseForm.courseName = row.courseName
@@ -228,7 +238,7 @@ import { adminCourseLis } from '@/apis';
           priceType: courseForm.priceType === '免费' ? 0 : 1,
           courseName: courseForm.courseName,
           price: courseForm.price,
-          fileIds: courseForm.fileIds.map((fileInfo) => fileInfo.response.id)
+          fileIds: courseForm.fileInfos.map((fileInfo) => fileInfo.response.id)
         })
           .then((res) => {
             if (res.data.code === 0) {
@@ -251,7 +261,7 @@ import { adminCourseLis } from '@/apis';
           courseName: courseForm.courseName,
           price: courseForm.price,
           printType: courseForm.priceType,
-          fileIds: courseForm.fileIds.map((fileInfo) => fileInfo.response.id)
+          fileIds: courseForm.fileInfos.map((fileInfo) => fileInfo.response.id)
         })
           .then((res) => {
             if (res.data.code === 0) {

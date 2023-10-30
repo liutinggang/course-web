@@ -111,7 +111,6 @@
 </template>
 
 <script setup>
-  import { useRoute } from 'vue-router'
   import { useRouter } from 'vue-router'
   import * as apis from '@/apis/index'
   import { onMounted, ref } from 'vue'
@@ -119,7 +118,6 @@
   import { ElMessage, genFileId } from 'element-plus'
   import Title from '@/components/title/index.vue'
   import { uploadUrl } from '@/apis/index'
-  const route = useRoute()
   const router = useRouter()
   onMounted(() => {
     getUserInfo()
@@ -151,7 +149,6 @@
     realName: [{ required: true, message: '请输入真实姓名', trigger: ['change', 'blur'] }],
     photo: [{ required: true, message: '请选择个人头像', trigger: ['change', 'blur'] }]
   }
-  const userInfo = ref({})
   const roleInfo = ref({})
   const back = () => {
     router.back()
@@ -159,24 +156,25 @@
   const getUserInfo = () => {
     apis.getUserInfo().then((res) => {
       if (res.data.code === 0) {
-        const { user, role } = res.data.data
-        userInfo.value = user
-        roleInfo.value = role
-        form.value.username = user.username
-        form.value.mobile = user.mobile
-        form.value.identityCode = user.identityCode
-        form.value.realName = user.realName
-        form.value.role = role.roleName
+        const { sysRole } = res.data.data
+        const userInfo = res.data.data
+        userInfo.value = userInfo
+        roleInfo.value = sysRole
+        form.value.username = userInfo.username
+        form.value.mobile = userInfo.mobile
+        form.value.identityCode = userInfo.identityCode
+        form.value.realName = userInfo.displayName
+        form.value.role = sysRole.roleName
         form.value.photo = [
           {
             uid: genFileId(),
             name: 'photo',
             status: 'success',
-            url: user.avatarUrl,
-            avatarId: user.avatarId,
+            url: userInfo.avatarUrl,
+            avatarId: userInfo.avatarId,
             response: {
-              id: user.avatarId,
-              url: user.avatarUrl
+              id: userInfo.avatarId,
+              url: userInfo.avatarUrl
             }
           }
         ]

@@ -56,8 +56,8 @@
           <el-button
             type="primary"
             @click="projectInfo(row)">
-            DETAIL</el-button
-          >
+            DETAIL
+          </el-button>
         </template>
       </el-table-column>
     </el-table>

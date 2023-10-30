@@ -1,4 +1,3 @@
-import { adminCourseLis } from '@/apis';
 <template>
   <div
     ref="mainRef"
@@ -61,8 +60,9 @@ import { adminCourseLis } from '@/apis';
             v-if="row.orderId === null"
             type="primary"
             @click="edit(row)">
-            DEATIL
+            CHOOSE-COURSE
           </el-button>
+          <span v-else> CHOOSED </span>
         </template>
       </el-table-column>
     </el-table>
@@ -150,12 +150,11 @@ import { adminCourseLis } from '@/apis';
       .catch((err) => console.log(err))
   }
   const edit = (row) => {
-    console.log(row.id)
-    // orderForm.courseId = row.id
-    // courseDetail(row.id).then((res) => {
-    //   console.log(res)
-    // })
-    // isShow.value = true
+    orderForm.courseId = row.id
+    courseDetail(row.id).then((res) => {
+      console.log(res)
+    })
+    isShow.value = true
   }
 
   const modifyComfirm = () => {

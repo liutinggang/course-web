@@ -7,8 +7,7 @@
           src="@/assets/image/logo_login.png"
           alt="" />
         <div class="title tw-h-full">
-          <p class="chinese">城建企业项目管理系统</p>
-          <p class="english"> City Construction Management System </p>
+          <p class="chinese">COURSE REGISTER</p>
         </div>
       </div>
       <div class="login_bg_image">
@@ -20,7 +19,7 @@
     <div class="box">
       <div class="login_form">
         <div class="login_form_title">
-          <p>用户注册<span>USER REGISTER</span></p>
+          <p>USER REGISTER<span>USER REGISTER</span></p>
         </div>
         <div class="login_form_main">
           <el-form
@@ -33,22 +32,22 @@
               <el-col :span="12">
                 <el-form-item
                   prop="username"
-                  label="用户名">
+                  label="USERNAME">
                   <el-input
                     v-model="form.username"
-                    placeholder="请输入用户名">
+                    placeholder="please int put usernam">
                   </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item
                   prop="password"
-                  label="密码">
+                  label="PASSWORD">
                   <el-input
                     v-model="form.password"
                     type="password"
                     :show-password="true"
-                    placeholder="请输入登录密码">
+                    placeholder="please intput password">
                   </el-input>
                 </el-form-item>
               </el-col>
@@ -57,17 +56,17 @@
               <el-col :span="12">
                 <el-form-item
                   prop="mobile"
-                  label="手机号">
+                  label="MOBILE">
                   <el-input
                     v-model="form.mobile"
-                    placeholder="请输入手机号">
+                    placeholder="pleas int put mobile">
                   </el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item
                   prop="realName"
-                  label="真实姓名">
+                  label="REAL-NAME">
                   <el-input
                     v-model="form.realName"
                     placeholder="请输入真实姓名">
@@ -75,30 +74,9 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row :gutter="20">
-              <el-col :span="12">
-                <el-form-item
-                  label="验证码"
-                  prop="smsCode">
-                  <el-input
-                    v-model="form.smsCode"
-                    placeholder="请输入验证码">
-                  </el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-button
-                  style="margin-top: 33px; width: 100%"
-                  type="primary"
-                  :disabled="isSend"
-                  @click="sendCode">
-                  {{ isSend ? `重新发送(${socend})` : '发送验证码' }}
-                </el-button>
-              </el-col>
-            </el-row>
             <el-form-item
               prop="identityCode"
-              label="身份证号">
+              label="ID-CODE">
               <el-input
                 v-model="form.identityCode"
                 placeholder="请输入身份证号">
@@ -107,7 +85,7 @@
 
             <el-form-item
               prop="photo"
-              label="个人头像">
+              label="AVATAR">
               <el-upload
                 ref="uploadRef"
                 v-model:file-list="form.photo"
@@ -193,22 +171,6 @@
 
   const FormRef = ref(null)
   const btnLoading = ref(false)
-
-  const isSend = ref(false)
-  const socend = ref(60)
-  const sendCode = () => {
-    isSend.value = true
-    const time = setInterval(() => {
-      if (socend.value > 0) {
-        socend.value = socend.value - 1
-      } else {
-        isSend.value = false
-        socend.value = 60
-        clearInterval(time)
-      }
-    }, 1000)
-  }
-
   const uploadRef = ref(null)
 
   const onExceed = () => {
@@ -229,7 +191,7 @@
         username: form.username, //用户名
         password: form.password, //密码
         mobile: form.mobile, //手机号
-        smsCode: form.smsCode, //验证码
+        smsCode: '123456', //验证码
         identityCode: form.identityCode, //身份证号
         realName: form.realName, //真实姓名
         avatarId: form.photo[0].response.id
