@@ -100,7 +100,7 @@ import { adminCourseLis } from '@/apis';
 
 <script setup>
   import elTitle from '@/components/title/index.vue'
-  import { userCourseList, chooseCourse } from '@/apis/user.js'
+  import { userCourseList, chooseCourse, courseDetail } from '@/apis/user.js'
   import { onMounted, reactive, ref } from 'vue'
   import { useElementSize } from '@vueuse/core'
   import { usePagination } from '@/utils/hooks.js'
@@ -148,8 +148,12 @@ import { adminCourseLis } from '@/apis';
       .catch((err) => console.log(err))
   }
   const edit = (row) => {
-    orderForm.courseId = row.id
-    isShow.value = true
+    console.log(row.id)
+    // orderForm.courseId = row.id
+    // courseDetail(row.id).then((res) => {
+    //   console.log(res)
+    // })
+    // isShow.value = true
   }
 
   const modifyComfirm = () => {

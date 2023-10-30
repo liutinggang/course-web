@@ -23,3 +23,6 @@ export const chooseCourse = (data) =>
  */
 export const myCourseOrderList = (data) =>
   get(`/course-consumer-order-api/api/v1/consumer/order/list`, data)
+
+export const courseDetail = (courseId) =>
+  get(`/course-consumer-course-api/api/v1/consumer/course/detail/${courseId}`)

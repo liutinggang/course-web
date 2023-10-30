@@ -79,32 +79,11 @@ import { adminCourseLis } from '@/apis';
 <script setup>
   import elTitle from '@/components/title/index.vue'
   import { myCourseOrderList } from '@/apis/user.js'
-  import { onMounted, reactive, ref } from 'vue'
-  import { useElementSize } from '@vueuse/core'
+  import { reactive, ref } from 'vue'
   import { usePagination } from '@/utils/hooks.js'
   const { pagination } = usePagination()
   const tableData = ref([])
-  const courseForm = reactive({
-    id: '',
-    courseName: '',
-    price: 0.0,
-    priceType: '',
-    fileIds: []
-  })
-  const formData = reactive({
-    keyword: '',
-    roleId: ''
-  })
-  const mainRef = ref(null)
-  const headerRef = ref(null)
-  const { height: mainHeight } = useElementSize(mainRef)
-  const { height: headerHeight } = useElementSize(headerRef)
-  onMounted(() => {
-    onSearch()
-  })
-
-  // dialog开关
-  const isShow = ref(false)
+  const formData = reactive({})
   // 页面大小发生变化
   const onSizeChange = () => {
     onSearch()
@@ -116,9 +95,7 @@ import { adminCourseLis } from '@/apis';
 
   const onSearch = () => {
     myCourseOrderList({
-      ...pagination,
-      keyword: formData.keyword.trim(),
-      roleId: formData.roleId
+      ...pagination
     })
       .then((res) => {
         if (res.data.code === 0) {
@@ -128,13 +105,6 @@ import { adminCourseLis } from '@/apis';
         }
       })
       .catch((err) => console.log(err))
-  }
-  const edit = (row) => {
-    courseForm.id = row.id
-    courseForm.courseName = row.courseName
-    courseForm.priceType = row.priceType === 0 ? '免费' : '付费'
-    courseForm.price = row.price
-    isShow.value = true
   }
 </script>
 

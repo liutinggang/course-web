@@ -161,6 +161,7 @@ import { adminCourseLis } from '@/apis';
   import elTitle from '@/components/title/index.vue'
   import * as apis from '@/apis/index.js'
   import { uploadUrl, adminCourseCreate, adminUpdateCourse } from '@/apis/index.js'
+  import { courseDetail } from '@/apis/user.js'
   import { onMounted, reactive, ref } from 'vue'
   import { useElementSize } from '@vueuse/core'
   import { usePagination } from '@/utils/hooks.js'
@@ -216,6 +217,10 @@ import { adminCourseLis } from '@/apis';
       .catch((err) => console.log(err))
   }
   const edit = (row) => {
+    courseDetail(row.id).then((res) => {
+      let fileIds = res.data.fileIds.split(',')
+      courseForm.fileIds = fileIds
+    })
     courseForm.id = row.id
     courseForm.courseName = row.courseName
     courseForm.priceType = row.priceType === 0 ? '免费' : '付费'

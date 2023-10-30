@@ -220,6 +220,11 @@ import { adminCourseLis } from '@/apis';
     courseForm.courseName = row.courseName
     courseForm.priceType = row.priceType === 0 ? '免费' : '付费'
     courseForm.price = row.price
+
+
+
+
+    
     isShow.value = true
   }
 
