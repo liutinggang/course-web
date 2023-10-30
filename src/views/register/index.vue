@@ -69,7 +69,7 @@
                   label="REAL-NAME">
                   <el-input
                     v-model="form.realName"
-                    placeholder="请输入真实姓名">
+                    placeholder="please input you realName">
                   </el-input>
                 </el-form-item>
               </el-col>
@@ -79,7 +79,7 @@
               label="ID-CODE">
               <el-input
                 v-model="form.identityCode"
-                placeholder="请输入身份证号">
+                placeholder="pleas input your idCode">
               </el-input>
             </el-form-item>
 
@@ -150,21 +150,23 @@
 
   // // 表单校验
   const rules = {
-    username: [{ required: true, message: '请输入用户名', trigger: ['change', 'blur'] }],
-    password: [{ required: true, message: '请输入密码', trigger: ['change', 'blur'] }],
-    mobile: [{ required: true, message: '请输入手机号', trigger: ['change', 'blur'] }],
-    smsCode: [{ required: true, message: '请输入验证码', trigger: ['change', 'blur'] }],
+    username: [{ required: true, message: 'username', trigger: ['change', 'blur'] }],
+    password: [{ required: true, message: 'password', trigger: ['change', 'blur'] }],
+    mobile: [{ required: true, message: 'mobile', trigger: ['change', 'blur'] }],
+    smsCode: [{ required: true, message: 'smsCode', trigger: ['change', 'blur'] }],
     identityCode: [
-      { required: true, message: '请输入身份证号', trigger: ['change', 'blur'] },
+      { required: true, message: 'pleas your input idCar', trigger: ['change', 'blur'] },
       {
         pattern:
           /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
-        message: '请输入正确格式的身份证号',
+        message: 'pleas input correct idcode',
         trigger: 'change'
       }
     ],
-    realName: [{ required: true, message: '请输入真实姓名', trigger: ['change', 'blur'] }],
-    photo: [{ required: true, message: '请选择个人头像', trigger: ['change', 'blur'] }]
+    realName: [
+      { required: true, message: 'pleas input your realName', trigger: ['change', 'blur'] }
+    ],
+    photo: [{ required: true, message: 'choose your avatar', trigger: ['change', 'blur'] }]
   }
 
   onMounted(() => {})

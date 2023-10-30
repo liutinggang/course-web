@@ -77,8 +77,8 @@ import { adminCourseLis } from '@/apis';
           </el-button>
           <el-button
             class="tw-px-[5px]"
-            type="danger"
             text
+            type="danger"
             @click="deleteCourse1(row)">
             DELTE
           </el-button>

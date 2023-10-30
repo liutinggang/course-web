@@ -89,6 +89,8 @@
           <el-button @click="isShow = false">Cancel</el-button>
           <el-button
             type="primary"
+            class="tw-px-[5px]"
+            text
             @click="modifyComfirm()">
             Confirm
           </el-button>

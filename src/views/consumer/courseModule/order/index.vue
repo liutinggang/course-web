@@ -3,7 +3,7 @@
     ref="mainRef"
     class="tw-w-full tw-h-full tw-p-[20px]">
     <div ref="headerRef">
-      <el-title title="MY ORDEER"></el-title>
+      <el-title title="MY ORDER"></el-title>
       <div class="tw-w-full tw-mt-[10px]">
         <el-form :model="formData">
           <el-row :gutter="20">
@@ -20,7 +20,7 @@
               <el-button
                 type="primary"
                 @click="onSearch">
-                查询
+                QUERY
               </el-button>
             </el-col>
           </el-row>

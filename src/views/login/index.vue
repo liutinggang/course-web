@@ -92,9 +92,9 @@
   import { ElMessage } from 'element-plus'
   import { login } from '@/apis'
   import { useUserStore } from '@/stores/user'
-
-  const router = useRouter()
   const store = useUserStore()
+  const router = useRouter()
+
   // 表单数据
   const form = reactive({
     username: '',

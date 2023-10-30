@@ -3,12 +3,12 @@
     ref="mainRef"
     class="tw-w-full tw-h-full tw-p-[20px]">
     <div ref="headerRef">
-      <el-title title="用户信息管理"></el-title>
+      <el-title title="USER MANAGER"></el-title>
       <div class="tw-w-full tw-mt-[10px]">
         <el-form :model="formData">
           <el-row :gutter="20">
             <el-col :span="6">
-              <el-form-item label="关键字">
+              <el-form-item label="KEYWORD">
                 <el-input
                   v-model="formData.keyword"
                   style="width: 100%">
@@ -16,7 +16,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="用户职位">
+              <el-form-item label="ROLENAME">
                 <el-select v-model="formData.roleId">
                   <el-option
                     v-for="item in roles"
@@ -32,7 +32,7 @@
               <el-button
                 type="primary"
                 @click="onSearch">
-                查询
+                QUERY
               </el-button>
             </el-col>
           </el-row>
@@ -47,32 +47,32 @@
       header-cell-class-name="my-el-table-header-cell-name"
       stripe>
       <el-table-column
-        label="序号"
+        label="CODE"
         type="index"
         :index="indexMethod"
         width="100px">
       </el-table-column>
       <el-table-column
         prop="username"
-        label="用户账号">
+        label="USERNAME">
       </el-table-column>
       <el-table-column
         prop="realName"
-        label="用户姓名">
+        label="REALNAME">
       </el-table-column>
       <el-table-column
         prop="roleName"
-        label="用户职位">
+        label="ROLE">
       </el-table-column>
       <el-table-column
         prop="mobile"
-        label="手机号">
+        label="MOBIlE">
       </el-table-column>
       <el-table-column
         prop="identityCode"
-        label="身份证号">
+        label="iDCAR">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="OPTIONS">
         <template #default="{ row }">
           <el-button
             type="primary"

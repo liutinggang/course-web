@@ -5,7 +5,7 @@
         style="width: 30px; height: 30px; cursor: pointer"
         @click="back">
       </DArrowLeft>
-      <Title title="用户信息"></Title>
+      <Title title="USERINFO"></Title>
     </div>
     <div class="login_form_main">
       <el-form
@@ -141,7 +141,7 @@
     username: [{ required: true, message: '请输入用户名', trigger: ['change', 'blur'] }],
     mobile: [{ required: true, message: '请输入手机号', trigger: ['change', 'blur'] }],
     identityCode: [
-      { required: true, message: '请输入身份证号', trigger: ['change', 'blur'] },
+      { required: true, message: 'pleas input your idCode', trigger: ['change', 'blur'] },
       {
         pattern:
           /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,

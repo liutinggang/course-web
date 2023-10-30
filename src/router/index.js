@@ -78,7 +78,7 @@ const routes = [
             path: 'roleList',
             component: () => import('@/views/admin/system/roleList/index.vue'),
             meta: {
-              routerName: '系统管理-角色管理'
+              routerName: 'system-roleManage'
             }
           },
           // 用户信息管理
@@ -86,7 +86,7 @@ const routes = [
             path: 'userInfoManage',
             component: () => import('@/views/admin/system/userInfoManage/index.vue'),
             meta: {
-              routerName: '系统管理-用户管理'
+              routerName: 'system-userManage'
             }
           }
         ]

@@ -56,6 +56,7 @@
           <el-button
             type="primary"
             class="tw-px-[5px]"
+            text
             @click="projectInfo(row)">
             DETAIL
           </el-button>
