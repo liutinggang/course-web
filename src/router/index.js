@@ -55,14 +55,14 @@ const routes = [
             path: 'courseManage',
             component: () => import('@/views/admin/courseModule/course/index.vue'),
             meta: {
-              routerName: '资金模块-资金管理'
+              routerName: 'courseModule-courseManage'
             }
           },
           {
             path: 'orderManage',
             component: () => import('@/views/admin/courseModule/order/index.vue'),
             meta: {
-              routerName: '资金模块-资金管理'
+              routerName: 'courseModule-orderManage'
             }
           }
         ]

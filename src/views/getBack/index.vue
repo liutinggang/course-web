@@ -7,8 +7,7 @@
           src="@/assets/image/logo_login.png"
           alt="" />
         <div class="title tw-h-full">
-          <p class="chinese">城建企业项目管理系统</p>
-          <p class="english"> City Construction Management System </p>
+          <p class="chinese">COURSE MANAGE</p>
         </div>
       </div>
       <div class="login_bg_image">
@@ -20,7 +19,7 @@
     <div class="box">
       <div class="login_form">
         <div class="login_form_title">
-          <p>找回密码<span>GET BACK</span></p>
+          <p>find back password<span>GET BACK</span></p>
         </div>
         <div class="login_form_main">
           <el-form
@@ -31,20 +30,20 @@
             label-position="top">
             <el-form-item
               prop="mobile"
-              label="手机号">
+              label="MOBILE">
               <el-input
                 v-model="form.mobile"
-                placeholder="请输入手机号">
+                placeholder="please input mobile">
               </el-input>
             </el-form-item>
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item
-                  label="验证码"
+                  label="SMSCODE"
                   prop="smsCode">
                   <el-input
                     v-model="form.smsCode"
-                    placeholder="请输入验证码">
+                    placeholder="pleas input smsCode">
                   </el-input>
                 </el-form-item>
               </el-col>
@@ -54,18 +53,18 @@
                   type="primary"
                   :disabled="isSend"
                   @click="sendCode">
-                  {{ isSend ? `重新发送(${socend})` : '发送验证码' }}
+                  {{ isSend ? `try again(${socend})` : 'sened message' }}
                 </el-button>
               </el-col>
             </el-row>
             <el-form-item
               prop="password"
-              label="密码">
+              label="PASSWORD">
               <el-input
                 v-model="form.password"
                 type="password"
                 :show-password="true"
-                placeholder="请输入登录密码">
+                placeholder="pleas input password">
               </el-input>
             </el-form-item>
             <el-form-item>
@@ -74,7 +73,7 @@
                 style="width: 100%"
                 :loading="btnLoading"
                 @click="handelLogin">
-                确认
+                CONFIRM
               </el-button>
             </el-form-item>
           </el-form>
@@ -83,12 +82,12 @@
           <span
             class="tw-text-[16px] tw-text-[#2C73EB] tw-cursor-pointer"
             @click="router.push('/register')">
-            注册
+            REGISTER
           </span>
           <span
             class="tw-text-[16px] tw-text-[#2C73EB] tw-cursor-pointer"
             @click="router.push('/login')">
-            登录
+            LOGIN
           </span>
         </div>
       </div>

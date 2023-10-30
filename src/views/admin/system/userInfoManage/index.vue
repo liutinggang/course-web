@@ -76,8 +76,10 @@
         <template #default="{ row }">
           <el-button
             type="primary"
+            class="tw-px-[5px]"
+            text
             @click="edit(row)">
-            编辑
+            edit
           </el-button>
         </template>
       </el-table-column>

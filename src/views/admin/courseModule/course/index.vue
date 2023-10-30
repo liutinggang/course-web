@@ -70,16 +70,15 @@ import { adminCourseLis } from '@/apis';
         <template #default="{ row }">
           <el-button
             type="primary"
+            class="tw-px-[5px]"
+            text
             @click="edit(row)">
             DETAIL
           </el-button>
           <el-button
-            type="primary"
-            @click="edit(row)">
-            EDIT
-          </el-button>
-          <el-button
+            class="tw-px-[5px]"
             type="danger"
+            text
             @click="deleteCourse1(row)">
             DELTE
           </el-button>
@@ -116,8 +115,8 @@ import { adminCourseLis } from '@/apis';
           prop="priceType"
           label="PRICE-TYPE">
           <el-radio-group v-model="courseForm.priceType">
-            <el-radio label="免费"></el-radio>
-            <el-radio label="付费"></el-radio>
+            <el-radio label="FREE"></el-radio>
+            <el-radio label="UNFREE"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item

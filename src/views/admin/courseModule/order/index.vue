@@ -20,7 +20,7 @@
               <el-button
                 type="primary"
                 @click="onSearch">
-                查询
+                QUERY
               </el-button>
             </el-col>
           </el-row>
@@ -55,11 +55,14 @@
         <template #default="{ row }">
           <el-button
             type="primary"
+            class="tw-px-[5px]"
             @click="projectInfo(row)">
             DETAIL
           </el-button>
           <el-button
             type="danger"
+            class="tw-px-[5px]"
+            text
             @click="deleteOrder1(row)">
             DELETE
           </el-button>

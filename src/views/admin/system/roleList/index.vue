@@ -2,7 +2,7 @@
   <div
     ref="mainRef"
     class="tw-w-full tw-h-full tw-p-[20px]">
-    <el-title title="角色管理"></el-title>
+    <el-title title="ROLE MANAGER"></el-title>
     <div
       ref="headerRef"
       class="tw-w-full tw-flex tw-justify-between tw-items-center">
@@ -10,7 +10,7 @@
         <el-form :model="formData">
           <el-row :gutter="20">
             <el-col :span="6">
-              <el-form-item label="角色名称">
+              <el-form-item label="ROLE NAME">
                 <el-input
                   v-model="formData.roleName"
                   style="width: 100%">
@@ -23,12 +23,12 @@
               <el-button
                 type="primary"
                 @click="onSearch">
-                查询
+                QUERY
               </el-button>
               <el-button
                 type="primary"
                 @click="onAdd">
-                新增
+                CREATE
               </el-button>
             </el-col>
           </el-row>
@@ -69,7 +69,7 @@
             type="primary"
             class="tw-px-[5px]"
             @click="onEdit(row)">
-            编辑
+            EDIT
           </el-button>
           <el-button
             v-if="isEdit(row.roleName)"
@@ -77,7 +77,7 @@
             type="danger"
             class="tw-px-[5px]"
             @click="onDelete(row)">
-            删除
+            DELETE
           </el-button>
         </template>
       </el-table-column>

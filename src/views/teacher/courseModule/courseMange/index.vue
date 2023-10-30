@@ -21,14 +21,13 @@ import { adminCourseLis } from '@/apis';
             <el-col :span="4">
               <el-button
                 type="primary"
-                s
                 @click="onSearch">
-                查询
+                QUERY
               </el-button>
               <el-button
                 type="primary"
                 @click="onAdd">
-                新增
+                CREATE
               </el-button>
             </el-col>
           </el-row>
@@ -45,38 +44,42 @@ import { adminCourseLis } from '@/apis';
       <el-table-column
         prop="id"
         :index="id"
-        label="编号">
+        label="CODE">
       </el-table-column>
       <el-table-column
         prop="courseName"
-        label="课程名称">
+        label="COURSE NAME">
       </el-table-column>
       <el-table-column
         prop="priceType"
-        label="价格类型">
+        label="PRICE TYPE">
         <template #default="{ row }">
-          {{ row.priceType === 1 ? '付费' : '免费' }}
+          {{ row.priceType === 1 ? 'FREE' : 'UNFREE' }}
         </template>
       </el-table-column>
       <el-table-column
         prop="price"
-        label="价格">
+        label="PRICE">
       </el-table-column>
       <el-table-column
         prop="identityCode"
-        label="状态">
+        label="STATUS">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="OPTIONS">
         <template #default="{ row }">
           <el-button
             type="primary"
+            class="tw-px-[5px]"
+            text
             @click="edit(row)">
-            详情
+            DETAIL
           </el-button>
           <el-button
             type="primary"
+            class="tw-px-[5px]"
+            text
             @click="edit(row)">
-            编辑
+            EDIT
           </el-button>
         </template>
       </el-table-column>
