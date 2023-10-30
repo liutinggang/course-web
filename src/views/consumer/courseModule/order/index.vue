@@ -1,10 +1,9 @@
-import { adminCourseLis } from '@/apis';
 <template>
   <div
     ref="mainRef"
     class="tw-w-full tw-h-full tw-p-[20px]">
     <div ref="headerRef">
-      <el-title title="MY ORDER"></el-title>
+      <el-title title="MY ORDEER"></el-title>
       <div class="tw-w-full tw-mt-[10px]">
         <el-form :model="formData">
           <el-row :gutter="20">
@@ -21,7 +20,7 @@ import { adminCourseLis } from '@/apis';
               <el-button
                 type="primary"
                 @click="onSearch">
-                QUERY
+                查询
               </el-button>
             </el-col>
           </el-row>
@@ -37,27 +36,28 @@ import { adminCourseLis } from '@/apis';
       stripe>
       <el-table-column
         prop="id"
+        width="250"
         label="CODE">
       </el-table-column>
+
       <el-table-column
         prop="courseName"
-        label="COURSE_NAME">
-      </el-table-column>
-      <el-table-column
-        prop="createTime"
-        label="ORDER_STATUS">
+        label="COURSE-NAME">
       </el-table-column>
       <el-table-column
         prop="orderStatus"
-        label="ORDER_STATUS">
+        label="orderStatus">
+        <template #default="{ row }">
+          {{ row.orderStatus === 0 ? 'studying' : 'finish' }}
+        </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="OPTIONS">
         <template #default="{ row }">
           <el-button
             type="primary"
-            @click="edit(row)">
-            DEATIL
-          </el-button>
+            @click="projectInfo(row)">
+            DETAIL</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -80,10 +80,26 @@ import { adminCourseLis } from '@/apis';
   import elTitle from '@/components/title/index.vue'
   import { myCourseOrderList } from '@/apis/user.js'
   import { reactive, ref } from 'vue'
-  import { usePagination } from '@/utils/hooks.js'
+  import { myCourseOrderList } from '@/apis/user'
   const { pagination } = usePagination()
+  import { useRouter } from 'vue-router'
+  const router = useRouter()
+  import { onMounted, reactive, ref } from 'vue'
+  import { useElementSize } from '@vueuse/core'
+  import { usePagination } from '@/utils/hooks.js'
   const tableData = ref([])
-  const formData = reactive({})
+  const formData = reactive({
+    keyword: '',
+    roleId: ''
+  })
+  const mainRef = ref(null)
+  const headerRef = ref(null)
+  const { height: mainHeight } = useElementSize(mainRef)
+  const { height: headerHeight } = useElementSize(headerRef)
+  onMounted(() => {
+    onSearch()
+  })
+
   // 页面大小发生变化
   const onSizeChange = () => {
     onSearch()
@@ -91,6 +107,15 @@ import { adminCourseLis } from '@/apis';
   // 当前页发生变化
   const onCurrentChange = () => {
     onSearch()
+  }
+
+  const projectInfo = (row) => {
+    router.push({
+      path: '/orderDetail',
+      query: {
+        orderId: row.id
+      }
+    })
   }
 
   const onSearch = () => {

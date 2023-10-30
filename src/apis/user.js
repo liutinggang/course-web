@@ -26,3 +26,16 @@ export const myCourseOrderList = (data) =>
 
 export const courseDetail = (courseId) =>
   get(`/course-consumer-course-api/api/v1/consumer/course/detail/${courseId}`)
+/**
+ * 订单详情
+ * @param {*} data
+ * @returns
+ */
+export const orderDetail = (orderId) =>
+  get(`/course-consumer-order-api/api/v1/order/detail/${orderId}`)
+/**
+ * 所有订单
+ * @param {*} data
+ * @returns
+ */
+export const teacherOrderList = (data) => get(`/course-consumer-order-api/api/v1/order/list`, data)
