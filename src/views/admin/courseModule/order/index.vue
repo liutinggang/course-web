@@ -145,7 +145,8 @@
 
   const onSearch = () => {
     teacherOrderList({
-      ...pagination
+      ...pagination,
+      keyword: formData.keyword
     })
       .then((res) => {
         if (res.data.code === 0) {
