@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '../router'
 
-export const baseUrl = 'http://18.142.149.25'
+export const baseUrl = import.meta.env.VITE_API_BASE_URL
 
 axios.defaults.timeout = 30000
 
